@@ -1,7 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { useInterval } from "../src/lib/hooks/useInterval";
 
-// Mock the setInterval and clearInterval functions
 jest.useFakeTimers();
 
 describe("useInterval", () => {
@@ -11,12 +10,10 @@ describe("useInterval", () => {
 
     renderHook(() => useInterval(callback, delay));
 
-    // Advance the timers
     jest.advanceTimersByTime(delay);
 
     expect(callback).toHaveBeenCalledTimes(1);
 
-    // Advance the timers again
     jest.advanceTimersByTime(delay);
 
     expect(callback).toHaveBeenCalledTimes(2);
@@ -28,10 +25,8 @@ describe("useInterval", () => {
 
     const { unmount } = renderHook(() => useInterval(callback, delay));
 
-    // Unmount the component
     unmount();
-
-    // Advance the timers
+    
     jest.advanceTimersByTime(delay);
 
     expect(callback).not.toHaveBeenCalled();

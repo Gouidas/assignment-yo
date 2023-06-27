@@ -1,7 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import { useFetch } from "../src/lib/hooks/useFetch";
 
-// Mock fetchFunction that returns a resolved Promise
 const fetchFunctionMock = jest.fn().mockResolvedValue("test data");
 
 describe("useFetch", () => {

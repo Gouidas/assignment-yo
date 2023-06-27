@@ -17,17 +17,17 @@ const SortSelect: React.FC<SortSelectProps> = ({ options, defaultValue, onChange
       color: selectedColorContext,
     },
     '.MuiInputBase-root': {
-      color: 'text.secondary', // default color
+      color: 'text.secondary',
       '&.Mui-focused': {
-        color: selectedColorContext, // color when focused
+        color: selectedColorContext,
       },
       '& .MuiOutlinedInput-input': {
         padding: '8px 32px 8px 17px',
         textAlign: 'left',
-        color: 'text.secondary', // default color
+        color: 'text.secondary',
       },
       '&.Mui-focused .MuiOutlinedInput-input': {
-        color: selectedColorContext, // color when focused
+        color: selectedColorContext,
       },
     },
     '.MuiOutlinedInput-notchedOutline': {
@@ -50,7 +50,7 @@ const SortSelect: React.FC<SortSelectProps> = ({ options, defaultValue, onChange
 
   const StyledMenuItem = styled(MenuItem)(({ theme, color }) => {
     const contrastTextColor = theme.palette.getContrastText(color || '#E50914');
-    const selectedAndHoverColor = shouldUpdateContext ? color : selectedColorContext; // Use selectedColorContext when shouldUpdateContext is false
+    const selectedAndHoverColor = shouldUpdateContext ? color : selectedColorContext;
     return {
       '&.Mui-selected, &.Mui-selected:hover': {
         backgroundColor: selectedAndHoverColor,
@@ -65,9 +65,9 @@ const SortSelect: React.FC<SortSelectProps> = ({ options, defaultValue, onChange
   
 
   const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
-    color: 'text.secondary', // default color
+    color: 'text.secondary',
     '&.Mui-focused': {
-      color: selectedColorContext, // color when focused
+      color: selectedColorContext, 
     },
     top: '-10px',
     right: '-50px',
@@ -78,7 +78,6 @@ const SortSelect: React.FC<SortSelectProps> = ({ options, defaultValue, onChange
     const newValue = event.target.value as string;
     setValue(newValue);
   
-    // Only update the context if shouldUpdateContext is true
     if (shouldUpdateContext) {
       if (selectedColorContext === selectedColor) {
         setSelectedColor(colors[options.findIndex(option => option.value === newValue)] || '#fff'); 

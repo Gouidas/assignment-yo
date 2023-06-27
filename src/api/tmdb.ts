@@ -23,10 +23,8 @@ const client: AxiosInstance = axios.create({
 export const getUpcomingMovies = async (): Promise<Movie[]> => {
   try {
     const response = await client.get(UPCOMING_URL);
-    console.log("getUpcomingMovies", response.data.results);
     return response.data.results;
   } catch (error) {
-    console.error("rrrrrrrrrrrrrr111111111111111", error);
     throw error;
   }
 };
@@ -40,17 +38,14 @@ let movieDetailsCache: MovieDetailsCache = {};
 export const getMovieDetails = async (id: number): Promise<Movie> => {
   try {
     if (movieDetailsCache[id]) {
-      console.log("Serving from cache");
       return movieDetailsCache[id];
     }
 
     const response = await client.get(`${MOVIE_DETAILS_URL}/${id}`);
 
     movieDetailsCache[id] = response.data;
-    console.log("getMovieDetails", response.data);
     return response.data;
   } catch (error) {
-    console.error("rrrrrrrrrrrrrr22222222222", error);
     throw error;
   }
 };
@@ -63,7 +58,6 @@ export const getActors = async (id: number): Promise<Actor[]> => {
     const { cast } = response.data;
     return cast.map((actor: Actor) => ({ ...actor, cast: [actor] }));
   } catch (error) {
-    console.error("rrrrrrrrrrrrrr33333333333333", error);
     throw error;
   }
 };
@@ -73,7 +67,6 @@ export const getMovieVideos = async (id: string): Promise<any> => {
     const response = await client.get(`/movie/${id}/videos`);
     return response.data.results;
   } catch (error) {
-    console.error("rrrrrrrrrrrrrr44444444444", error);
     throw error;
   }
 };

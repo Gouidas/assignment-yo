@@ -1,4 +1,4 @@
-import { SvgIcon, SvgIconProps } from '@mui/material';
+import { SvgIcon } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 
 type ColorChangingLogoProps = {

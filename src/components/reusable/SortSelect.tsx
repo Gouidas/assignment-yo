@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent, styled } from '@mui/material';
 import { SortSelectProps } from '../../lib/types/SortSelectProps';
 import { ColorContext } from '../../lib/context/ColorContext';
-
-const colors = ["#E50914", "#56ffae", "#09f0ff", "#E87C03"];
+import { colors } from '../../lib/constants';
 
 const SortSelect: React.FC<SortSelectProps> = ({ options, defaultValue, onChange, selectedColorProp, labelText, shouldUpdateContext }) => {
   const { selectedColor, setSelectedColor } = useContext(ColorContext);
@@ -11,7 +10,7 @@ const SortSelect: React.FC<SortSelectProps> = ({ options, defaultValue, onChange
 
   const [value, setValue] = React.useState(defaultValue);
 
-  const StyledFormControl = styled(FormControl)(({ theme }) => ({
+  const StyledFormControl = styled(FormControl)(() => ({
     minWidth: '105px',
     '.MuiFormLabel-root.Mui-focused': {
       color: selectedColorContext,

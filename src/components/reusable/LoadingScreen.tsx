@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { useInterval } from '../../lib/hooks/useInterval';
-
+import { colors } from '../../lib/constants';
 type LoadingScreenProps = {
   svg: React.ReactElement;
   text?: string;
 };
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ svg, text }) => {
-  const colors = ['#f44336', '#2196f3', '#4caf50', '#ffeb3b'];
   const [currentColorIndex, setCurrentColorIndex] = useState(0);
 
   const changeColor = () => {

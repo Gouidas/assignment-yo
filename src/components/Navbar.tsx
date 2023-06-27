@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Typography, Dialog, DialogTitle, DialogContent, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import SortSelect from './reusable/SortSelect';
 import { NavbarTypes } from '../lib/types/Navbar';
 import ColorChangingLogo from './reusable/ColorChangingLogo';
 import DocumentationComponent from './Documentation';
+import DialogComponent from './reusable/DialogComponent';
 
 const Navbar: React.FC<NavbarTypes> = ({ setSortKey, selectedColor }) => {
   const [open, setOpen] = useState(false);
@@ -42,13 +43,15 @@ const Navbar: React.FC<NavbarTypes> = ({ setSortKey, selectedColor }) => {
       </Box>
       <Box sx={{display: 'flex'}}>
         <Box sx={{mx: '1rem'}}>
-          <Button color="inherit" onClick={handleDialogOpen}>Docs</Button> 
-          <Dialog open={open} onClose={handleDialogClose} fullWidth maxWidth="xl">
-            <DialogTitle>Documentation</DialogTitle>
-            <DialogContent>
-              <DocumentationComponent />
-            </DialogContent>
-          </Dialog>
+        <Button color="inherit" onClick={handleDialogOpen}>Docs</Button> 
+        <DialogComponent 
+            title="Documentation" 
+            onClose={handleDialogClose} 
+            selectedColor={selectedColor}
+            open={open}
+        >
+            <DocumentationComponent />
+        </DialogComponent>
         </Box>
         <Box>
         <SortSelect

@@ -4,7 +4,7 @@ module.exports = {
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$":
       "<rootDir>/node_modules/react-scripts/config/jest/babelTransform.js",
-    "^.+\\.svg$": "<rootDir>/src/svgTransform.js", // Add this line
+    "^.+\\.svg$": "<rootDir>/src/svgTransform.js",
   },
   moduleNameMapper: {
     "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",

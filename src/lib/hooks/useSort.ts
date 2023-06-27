@@ -13,7 +13,7 @@ export const useSort = <T extends Object>(
     switch (sortKey) {
       case "name":
       case "title":
-      case "character": // Add this case
+      case "character":
         sorted = [...data].sort((a, b) =>
           String(a[sortKey]).localeCompare(String(b[sortKey]))
         );

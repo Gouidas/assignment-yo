@@ -13,11 +13,9 @@ test('renders SectionWithItems component with title and items', () => {
 
   render(<SectionWithItems title={title} items={items} selectedColor={selectedColor} />);
 
-  // Assert that the title is rendered
   const titleElement = screen.getByText(title);
   expect(titleElement).toBeInTheDocument();
 
-  // Assert that the items are rendered
   const item1Element = screen.getByText('Item 1');
   expect(item1Element).toBeInTheDocument();
 

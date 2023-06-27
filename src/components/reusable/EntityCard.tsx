@@ -49,8 +49,6 @@ const EntityCard: React.FC<EntityCardProps> = ({
         windowWidth = window.innerWidth;
         const recalculatedColumns = Math.floor((windowWidth - totalPadding) / (cardWidth + gapWidth));
         setColumns(recalculatedColumns);
-
-        // Reset the disable hover state
         disableHoverRef.current = recalculatedColumns === 1;
       }, 200);
     };
@@ -77,12 +75,11 @@ const EntityCard: React.FC<EntityCardProps> = ({
   useEffect(() => {
     if (isHovered && !disableHover && movie) {
         const cachedMovie = localStorage.getItem(`movie-${movie.id}`);
-        const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        const oneDay = 24 * 60 * 60 * 1000; 
 
         if (cachedMovie) {
             const { details, timestamp } = JSON.parse(cachedMovie);
 
-            // If the data is not older than one day, use it
             if (new Date().getTime() - timestamp < oneDay) {
                 setMovieDetails(details);
             } else {
@@ -122,7 +119,6 @@ const EntityCard: React.FC<EntityCardProps> = ({
         } else {
           setTranslate('0');
         }
-        // If there is only one item in a row, log this information
         if (columns === 1) {
           console.log('Only one item in a row');
           disableHoverRef.current = true;

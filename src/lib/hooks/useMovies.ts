@@ -21,6 +21,5 @@ export const useMovies = (handleError: (error: string) => void) => {
     movieSortKey,
     MOVIES_SORTING_LIST as Array<keyof Movie>
   );
-  // console.log("useMovies", movies, loading, setSortKey, error);
   return { movies: sortedMovies, loading, setSortKey, error };
 };

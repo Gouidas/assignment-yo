@@ -28,7 +28,6 @@ const Trailer: React.FC<TrailerProps> = ({ movieId, fallbackImage, autoplay }) =
           const baseEmbedUrl = `https://www.youtube.com/embed/${videoData[0]?.key}`;
           const autoplayUrl = `${baseEmbedUrl}?autoplay=1&controls=0&mute=1&modestbranding=1&showinfo=0&rel=0`;
           
-          // Save both URLs to local storage
           localStorage.setItem(`trailer-${movieId}-true`, autoplayUrl);
           localStorage.setItem(`trailer-${movieId}-false`, baseEmbedUrl);
   

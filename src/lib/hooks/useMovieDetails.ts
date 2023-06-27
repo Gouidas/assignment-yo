@@ -38,15 +38,6 @@ export const useMovieDetails = (handleError?: (error: string) => void) => {
     setSelectedMovie(null);
     setActors([]);
   };
-  // console.log(
-  //   "useMovieDetails",
-  //   actors,
-  //   selectedMovie,
-  //   loading,
-  //   open,
-  //   handleOpen,
-  //   handleClose
-  // );
   return {
     actors,
     selectedMovie,

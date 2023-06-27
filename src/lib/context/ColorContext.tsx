@@ -1,11 +1,9 @@
 import React, { createContext, useState } from 'react';
-
+import { colors } from '../constants';
 interface ColorContextProps {
   selectedColor: string;
   setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
 }
-
-const colors = ["#E50914", "#56ffae", "#09f0ff", "#E87C03"];
 
 export const ColorContext = createContext<ColorContextProps>({
   selectedColor: '',

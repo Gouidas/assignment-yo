@@ -10,3 +10,4 @@ export const MOVIES_SORTING_LIST = [
   "vote_average",
   "popularity",
 ];
+export const colors = ["#E50914", "#36a845", "#3e7aff", "#E87C03"];

@@ -5,7 +5,6 @@ import { ColorContext } from '../../lib/context/ColorContext';
 import Trailer from './Trailer';
 import { getMovieDetails } from '../../api/tmdb';
 import { Movie } from '../../lib/types/Movie';
-import { fetchAndUpdateDetails } from '../../lib/hooks/fetchAndUpdateDetails';
 
 const EntityCard: React.FC<EntityCardProps> = ({
   movie,

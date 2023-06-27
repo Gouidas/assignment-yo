@@ -1,6 +1,6 @@
 import React, { useContext, useState, useCallback } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Box, CircularProgress, Typography, ThemeProvider, SvgIcon  } from '@mui/material';
+import { Box, Typography, ThemeProvider } from '@mui/material';
 import ErrorSnackbar from './components/reusable/ErrorSnackbar';
 import EntityCard from './components/reusable/EntityCard';
 import MovieDetails from './components/MovieDetails';
@@ -14,7 +14,7 @@ import LoadingScreen from './components/reusable/LoadingScreen';
 import Navbar from './components/Navbar';
 
 const App: React.FC = () => {
-  const { selectedColor, setSelectedColor } = useContext(ColorContext); 
+  const { selectedColor } = useContext(ColorContext); 
   const [moviesError, setMoviesError] = useState<string | null>(null);
   const [detailsError, setDetailsError] = useState<string | null>(null);
 

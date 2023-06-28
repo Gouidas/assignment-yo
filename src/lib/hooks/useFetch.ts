@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 
+// This custom hook abstracts the pattern of fetching data, managing the loading state,
+// and handling errors. By passing a fetch function, components can use this hook to manage
+// any asynchronous data fetching needs.
 export const useFetch = <T>(
   fetchFunction: () => Promise<T>,
   errorHandler?: (error: string) => void

@@ -6,26 +6,35 @@ import SortSelect from './reusable/SortSelect';
 import EntityCard from './cards/EntityCard';
 import { useSort } from '../lib/hooks/useSort';
 import { ColorContext } from '../lib/context/ColorContext';
-import prifileTransparent from '../assets/images/prifileTransparent.png';
 import SectionWithItems from './reusable/SectionWithItems';
 import Trailer from './reusable/Trailer';
 import DialogComponent from './reusable/DialogComponent';
 
-
+// MovieDetails is a component for displaying details of a selected movie in a dialog box.
 const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, actors, open, onClose }) => {
   const { selectedColor } = useContext(ColorContext);
   const { title, overview, homepage, genres, production_companies, imdb_id  } = movie;
 
+  // Sorting options for the actors list.
   const actorSortOptions = ['name', 'character', 'popularity'] as (keyof Cast)[];
+
+  // Use a useMemo hook to avoid unnecessary computations in case of re-renders.
   const castMembers = useMemo(() => actors.flatMap(actor => actor.cast), [actors]);
 
+  // We use a custom hook, useSort, to sort the cast members based on the selected sort key.
   const { sortedData: sortedCast, setSortKey: setActorSortKey } = useSort<Cast>(
     castMembers,
     'name',
     actorSortOptions
   );
 
+  // The details of the movie are displayed in a Dialog component.
   return (
+    // DialogComponent provides the main structure of the details display.
+    // The content of the movie details is structured in a grid with two main columns.
+    // On the left, we have the movie overview, homepage link, genres, and production companies.
+    // On the right, we have the movie trailer.
+    // At the bottom, we display the sorted list of actors.
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="xl">
       <DialogComponent 
           title={title} 
@@ -108,9 +117,9 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, actors, open, onClos
           </Box>
           <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', justifyContent: 'center', alignItems: 'center' }}>
             {sortedCast.map((cast, index) => (
-              <Box key={cast.id} sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Box key={cast.id} sx={{ display: 'flex', justifyContent: 'center' }}> 
                 <EntityCard
-                  image={cast.profile_path ? `https://image.tmdb.org/t/p/original${cast.profile_path}` : prifileTransparent}
+                  image={cast.profile_path ? `https://image.tmdb.org/t/p/original${cast.profile_path}` : 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'}
                   altText={cast.name}
                   index={index}
                   totalItems={sortedCast.length}

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+// This hook is used for sorting an array of data based on a selected key.
+// It supports different sorting criteria based on the type of the selected key.
 export const useSort = <T extends Object>(
   data: T[],
   defaultSortKey: keyof T,

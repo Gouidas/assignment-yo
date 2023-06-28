@@ -35,7 +35,6 @@ const Trailer: React.FC<TrailerProps> = ({ movieId, fallbackImage, autoplay }) =
           setTrailerUrl(embedUrl);
           setIsLoading(false);
         } catch (error) {
-          console.log("errrrrrrrrr", error);
           setSnackbarOpen(true);
           setIsLoading(false);
         }

@@ -12,21 +12,28 @@ import Navbar from './components/Navbar';
 import useErrors from './lib/hooks/useErrors';
 import MovieCards from './components/cards/renderMovies';
 
+// App component is the main entry point for our app and contains state and error handling logic.
 const App: React.FC = () => {
-  const { selectedColor } = useContext(ColorContext); 
-  const { error: moviesError, handleError: handleMoviesError, resetError: resetMoviesError } = useErrors();
-  const { error: detailsError, handleError: handleDetailsError, resetError: resetDetailsError } = useErrors();
+// useContext is used here to share the selected color across all components.
+const { selectedColor } = useContext(ColorContext); 
 
-  const { movies, loading: moviesLoading, setSortKey } = useMovies(handleMoviesError);
-  const { actors, selectedMovie, loading: detailsLoading, open, handleOpen, handleClose } = useMovieDetails(handleDetailsError);
+// The useErrors hooks are used to manage error state and handlers for both movies and details.
+const { error: moviesError, handleError: handleMoviesError, resetError: resetMoviesError } = useErrors();
+const { error: detailsError, handleError: handleDetailsError, resetError: resetDetailsError } = useErrors();
 
-  const loading = moviesLoading || detailsLoading;
+// We're fetching movie and movie details data using custom hooks. The error handlers are passed as arguments to these hooks.
+const { movies, loading: moviesLoading, setSortKey } = useMovies(handleMoviesError);
+const { actors, selectedMovie, loading: detailsLoading, open, handleOpen, handleClose } = useMovieDetails(handleDetailsError);
 
-  const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
+// We consider the app to be loading if either movies or details are being fetched.
+const loading = moviesLoading || detailsLoading;
 
-  const handleCardHover = (hovered: boolean, index: number) => {
-    setHoveredCardIndex(hovered ? index : null);
-  };
+// We're tracking the index of the hovered movie card to control hover styles.
+const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
+
+const handleCardHover = (hovered: boolean, index: number) => {
+  setHoveredCardIndex(hovered ? index : null);
+};
 
   return (
     <ThemeProvider theme={theme}>

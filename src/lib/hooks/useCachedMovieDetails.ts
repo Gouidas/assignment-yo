@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { Movie } from "../../lib/types/Movie";
 import { getMovieDetails } from "../../api/tmdb";
 
+// This custom hook fetches movie details from local storage or, if not available, from the TMDB API.
+// If the details are fetched from the API, they are cached in local storage for future use.
+// The data in local storage is considered stale and refetched from the API if it is more than one day old.
+// If the 'disableHover' flag is true, it immediately returns null and does not perform any operations.
 const useCachedMovieDetails = (
   movie: Movie | undefined,
   disableHover: boolean

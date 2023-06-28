@@ -11,7 +11,8 @@ const CardContainer: React.FC<CardContainerProps> = ({
   cardWidth,
   translate,
 }) => {
-
+  // This component acts as a generic container for different types of cards. 
+  // It takes care of common properties and styles like handling mouse events, styling and animations.
   return (
     <Card
       onClick={onClick}

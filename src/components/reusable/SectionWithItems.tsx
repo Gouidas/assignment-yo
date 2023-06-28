@@ -36,7 +36,7 @@ const SectionWithItems: React.FC<SectionWithItemsProps> = ({
               />
             );
           }
-          if (item.type === 'image' && item.logo_path) {
+          if (item.type === 'image') {
             return (
               <Box
                 key={item.id}
@@ -62,7 +62,7 @@ const SectionWithItems: React.FC<SectionWithItemsProps> = ({
                 </Typography>
                 <Box
                   component="img"
-                  src={`https://image.tmdb.org/t/p/original${item.logo_path}`}
+                  src={item.logo_path ? `https://image.tmdb.org/t/p/original${item.logo_path}` : 'https://via.placeholder.com/150'}
                   alt={item.name}
                   sx={{
                     height: '2.5rem',

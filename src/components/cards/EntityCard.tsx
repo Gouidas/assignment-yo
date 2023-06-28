@@ -22,6 +22,7 @@ const EntityCard: React.FC<EntityCardProps> = ({
 }) => {
   const { selectedColor } = useContext(ColorContext);
   const { columns, disableHoverRef } = useColumnCount(disableHover);
+  // Using a hover hook to handle hover state and translate position of the card
   const hoverProps: UseHoverProps = {
     columns,
     disableHover,
@@ -31,8 +32,10 @@ const EntityCard: React.FC<EntityCardProps> = ({
     totalItems,
   };
   const { isHovered, handleMouseEnter, handleMouseLeave, translate } = useHover(hoverProps);
+  // Getting movie details from cache if available
   const movieDetails = useCachedMovieDetails(movie, disableHover);
 
+  // Depending on the hover state and the number of columns, the component can either render a NormalCard or a HoveredCard
   return (
     <Box
         sx={{

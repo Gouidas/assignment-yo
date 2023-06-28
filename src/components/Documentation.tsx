@@ -1,6 +1,7 @@
 import React from 'react';
 import { Divider, Typography, List, ListItem } from '@mui/material';
 
+//The DocumentationComponent is a functional component that returns static content for the application documentation.
 const DocumentationComponent: React.FC = () => {
   return (
     <div>

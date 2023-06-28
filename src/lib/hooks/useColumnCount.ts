@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { calculateColumns } from "./calculateColumns";
 
+// This custom hook calculates the number of columns that can be displayed based on the current window width.
+// It responds to window resize events and recalculates the column count.
+// It also sets the 'disableHover' flag to true if only one column can be displayed.
+// This flag can be used to disable hover effects on the cards for mobile and other narrow displays.
 const useColumnCount = (disableHover: boolean) => {
   const cardWidth = 200;
   const gapWidth = 16;

@@ -5,7 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ColorProvider } from './lib/context/ColorContext';
 
+// Root component that wraps the App with necessary context providers.
 const Root = () => {
+  // Clears local storage every time the app reloads.
   useEffect(() => {
     localStorage.clear();
   }, []);

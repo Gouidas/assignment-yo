@@ -1,4 +1,3 @@
-// MovieCard.tsx
 import React from 'react';
 import { Typography } from '@mui/material';
 import EntityCard from './EntityCard';
@@ -12,9 +11,12 @@ type MovieCardProps = {
   onClick: () => void;
   hoveredCardIndex: number | null;
 }
-
+// MovieCard is a component for rendering each individual movie.
+// It takes movie details, index, and hover and click event handlers as props.
 const MovieCard: React.FC<MovieCardProps> = ({ movie, index, totalItems, onHover, onClick, hoveredCardIndex }) => {
   return (
+    // EntityCard component is used for each movie card.
+    // onHover prop is used to update the hoveredCardIndex in the parent component.
     <EntityCard
       key={movie.id}
       movie={movie}

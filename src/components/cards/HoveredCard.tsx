@@ -14,6 +14,7 @@ const HoveredCard: React.FC<HoveredCardProps> = ({
   handleMouseLeave,
   translate,
 }) => (
+  // HoveredCard extends from CardContainer but has additional features, such as showing movie trailer and overview.
   <CardContainer
     onClick={onClick}
     handleMouseEnter={handleMouseEnter}

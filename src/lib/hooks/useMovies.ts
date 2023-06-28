@@ -5,6 +5,7 @@ import { useSort } from "./useSort";
 import { useFetch } from "./useFetch";
 import { MOVIES_SORTING_LIST } from "../constants";
 
+// This hook manages the movies list, which fetches the data and handles the sorting of the list.
 export const useMovies = (handleError: (error: string) => void) => {
   const [movieSortKey, setMovieSortKey] = useState<
     "release_date" | "title" | "vote_average" | "popularity"

@@ -12,6 +12,7 @@ const NormalCard: React.FC<NormalCardProps> = ({
   handleMouseEnter,
   handleMouseLeave,
 }) => (
+  // NormalCard extends from CardContainer and represents the default state of the card.
   <CardContainer
     onClick={onClick}
     handleMouseEnter={handleMouseEnter}

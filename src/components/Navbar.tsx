@@ -5,6 +5,8 @@ import { NavbarTypes } from '../lib/types/Navbar';
 import ColorChangingLogo from './reusable/ColorChangingLogo';
 import DocumentationComponent from './Documentation';
 import DialogComponent from './reusable/DialogComponent';
+import { MOVIE_SORT_OPTIONS  } from '../lib/constants';
+
 
 //Navbar is a functional component that takes a setSortKey function and selectedColor from props.
 const Navbar: React.FC<NavbarTypes> = ({ setSortKey, selectedColor }) => {
@@ -61,12 +63,7 @@ const Navbar: React.FC<NavbarTypes> = ({ setSortKey, selectedColor }) => {
         <Box>
           {/* SortSelect component allows sorting of movie data based on different attributes */}
           <SortSelect
-            options={[
-              { value: 'release_date', label: 'Release date' },
-              { value: 'title', label: 'Title' },
-              { value: 'vote_average', label: 'Average vote' },
-              { value: 'popularity', label: 'Popularity' },
-            ]}
+            options={MOVIE_SORT_OPTIONS}
             defaultValue='release_date'
             onChange={(value: string | number) => setSortKey(value as "release_date" | "title" | "vote_average" | "popularity")}
             selectedColorProp={selectedColor}

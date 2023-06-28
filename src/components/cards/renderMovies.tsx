@@ -1,18 +1,6 @@
-import { Actor } from "../../lib/types/Actor";
-import { Movie } from "../../lib/types/Movie";
 import MovieDetails from "../MovieDetails";
 import MovieCard from "./MovieCard";
-
-interface MovieCardsProps {
-  movies: Movie[];
-  selectedMovie: Movie | null;
-  actors: Actor[] | null; // Change this line
-  open: boolean;
-  onClose: () => void;
-  onHover: (hovered: boolean, index: number) => void;
-  onClick: (id: number) => void;
-  hoveredCardIndex: number | null;
-}
+import { MovieCardsProps } from "../../lib/types/MovieCardsProps";
 
 // MovieCards component is responsible for rendering all the movie cards and the MovieDetails component.
 const MovieCards: React.FC<MovieCardsProps> = ({ movies, selectedMovie, actors, open, onClose, onHover, onClick, hoveredCardIndex }) => {

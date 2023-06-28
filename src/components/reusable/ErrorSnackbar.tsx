@@ -1,15 +1,9 @@
 import React, { useContext } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { ErrorSnackbarProps } from '../../lib/types/ErrorSnackbarProps'; 
 import { ColorContext } from '../../lib/context/ColorContext'; 
+import { CustomErrorSnackbarProps } from '../../lib/types/aaa';
 
-interface CustomErrorSnackbarProps extends ErrorSnackbarProps {
-  position?: {
-    vertical: 'top' | 'bottom';
-    horizontal: 'left' | 'right' | 'center';
-  };
-}
 
 // Snackbar for error messages with color provided from a context
 const ErrorSnackbar: React.FC<CustomErrorSnackbarProps> = ({ open, onClose, message, position }) => {

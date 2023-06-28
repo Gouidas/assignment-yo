@@ -1,0 +1,76 @@
+import { useState, useCallback } from "react";
+import { Movie } from "../types/Movie";
+import { Actor } from "../types/Actor"; // Assuming you have a type for Actor
+import { useMovies } from "./useMovies";
+import useCachedMovieDetails from "./useCachedMovieDetails";
+
+const fetchMovieDetails = (
+  movieId: number
+): Promise<{ movie: Movie; actors: Actor[] }> => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const mockMovie: Movie = {
+        id: movieId,
+        title: "Sample Movie",
+        release_date: "2000-01-01",
+        vote_average: 8,
+        vote_count: 10000,
+        poster_path: "/samplePosterPath.jpg",
+        overview: "Sample movie overview",
+        homepage: "https://sample-movie-homepage.com",
+        genres: [],
+      };
+      const mockActors: Actor[] = [];
+      resolve({ movie: mockMovie, actors: mockActors });
+    }, 2000);
+  });
+};
+
+const useMovieFetching = () => {
+  const [moviesError, setMoviesError] = useState<string | null>(null);
+  const {
+    movies,
+    loading: moviesLoading,
+    setSortKey,
+  } = useMovies(setMoviesError);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [actors, setActors] = useState<Actor[] | null>(null);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleOpen = useCallback((movieId: number) => {
+    setLoading(true);
+    setMoviesError(null);
+
+    fetchMovieDetails(movieId)
+      .then(({ movie, actors }) => {
+        setSelectedMovie(movie);
+        setActors(actors);
+        setOpen(true);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setMoviesError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return {
+    movies,
+    moviesLoading,
+    setSortKey,
+    selectedMovie,
+    actors,
+    open,
+    handleOpen,
+    handleClose,
+    loading,
+    error: moviesError,
+  };
+};
+
+export default useMovieFetching;

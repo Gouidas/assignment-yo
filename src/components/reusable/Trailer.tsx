@@ -35,10 +35,9 @@ const Trailer: React.FC<TrailerProps> = ({ movieId, fallbackImage, autoplay }) =
           setTrailerUrl(embedUrl);
           setIsLoading(false);
         } catch (error) {
-          setTimeout(() => {
-            setSnackbarOpen(true);
-            setIsLoading(false);
-          }, 1000);
+          console.log("errrrrrrrrr", error);
+          setSnackbarOpen(true);
+          setIsLoading(false);
         }
       }
     };
@@ -56,23 +55,23 @@ const Trailer: React.FC<TrailerProps> = ({ movieId, fallbackImage, autoplay }) =
   if (isLoading) {
     return (
       <Box sx={{ position: 'relative' }}>
-      <CardMedia
-        component="img"
-        image={fallbackImage}
-        alt={movieId}
-        sx={{ height: '250px' }}
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
-        <CircularProgress color="inherit" />
+        <CardMedia
+          component="img"
+          image={fallbackImage}
+          alt={movieId}
+          sx={{ height: '250px' }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          <CircularProgress color="inherit" />
+        </Box>
       </Box>
-    </Box>
     );
   }
 
@@ -81,15 +80,9 @@ const Trailer: React.FC<TrailerProps> = ({ movieId, fallbackImage, autoplay }) =
       <Box sx={{ position: 'relative' }}>
         <CardMedia
           component="img"
-          image={fallbackImage[0]}
+          image={fallbackImage}
           alt={movieId}
           sx={{ height: '250px' }}
-        />
-        <ErrorSnackbar 
-          open={snackbarOpen} 
-          onClose={handleSnackbarClose} 
-          message="Error loading trailer." 
-          position={{ vertical: 'top', horizontal: 'right' }} 
         />
       </Box>
     );

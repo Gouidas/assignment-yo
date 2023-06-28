@@ -11,6 +11,7 @@ interface CustomErrorSnackbarProps extends ErrorSnackbarProps {
   };
 }
 
+// Snackbar for error messages with color provided from a context
 const ErrorSnackbar: React.FC<CustomErrorSnackbarProps> = ({ open, onClose, message, position }) => {
   const { selectedColor } = useContext(ColorContext);
   const anchorOrigin = position || { vertical: 'bottom', horizontal: 'left' };

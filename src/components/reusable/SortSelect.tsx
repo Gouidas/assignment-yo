@@ -4,6 +4,9 @@ import { SortSelectProps } from '../../lib/types/SortSelectProps';
 import { ColorContext } from '../../lib/context/ColorContext';
 import { colors } from '../../lib/constants';
 
+
+// Select dropdown component that changes the color context upon selection if 'shouldUpdateContext' is true.
+// Otherwise, it uses the color from context.
 const SortSelect: React.FC<SortSelectProps> = ({ options, defaultValue, onChange, selectedColorProp, labelText, shouldUpdateContext }) => {
   const { selectedColor, setSelectedColor } = useContext(ColorContext);
   const selectedColorContext = selectedColor;

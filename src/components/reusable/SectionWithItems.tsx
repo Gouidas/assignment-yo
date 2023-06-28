@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Box, Typography, Chip } from '@mui/material';
 import { SectionWithItemsProps } from '../../lib/types/SectionWithItemsProps';
 
+
+// Section that displays a list of items. Hovering over an item reveals its full name if it's too long.
 const SectionWithItems: React.FC<SectionWithItemsProps> = ({
   title,
   items,

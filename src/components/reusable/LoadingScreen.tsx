@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { useInterval } from '../../lib/hooks/useInterval';
 import { colors } from '../../lib/constants';
-type LoadingScreenProps = {
-  svg: React.ReactElement;
-  text?: string;
-};
+import { LoadingScreenProps } from '../../lib/types/LoadingScreenProps';
 
+// Loading screen component that changes color every second
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ svg, text }) => {
   const [currentColorIndex, setCurrentColorIndex] = useState(0);
 

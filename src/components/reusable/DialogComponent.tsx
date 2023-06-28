@@ -3,6 +3,7 @@ import { Dialog, DialogTitle, DialogContent, Typography, IconButton, Box } from 
 import CloseIcon from '@mui/icons-material/Close';
 import { DialogComponentProps } from '../../lib/types/DialogComponentProps';
 
+// A generic dialog component styled with a given 'selectedColor'
 const DialogComponent: React.FC<DialogComponentProps> = ({ title, onClose, selectedColor, open, children }) => {
     return (
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="xl">

@@ -2,15 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { getMovieVideos } from '../../api/tmdb';
 import { Box, CardMedia } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
-import ErrorSnackbar from './ErrorSnackbar';
+import { TrailerProps } from '../../lib/types/TrailerProps';
 
-interface TrailerProps {
-  movieId: string;
-  fallbackImage: string;
-  autoplay?: boolean;
-}
 
 const Trailer: React.FC<TrailerProps> = ({ movieId, fallbackImage, autoplay }) => {
+    // Maintain the state of the trailer URL, loading status, and error
   const [trailerUrl, setTrailerUrl] = useState<string | null>(null);
   const [errorLoading, setErrorLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,16 +14,19 @@ const Trailer: React.FC<TrailerProps> = ({ movieId, fallbackImage, autoplay }) =
   
   useEffect(() => {
     const fetchTrailerUrl = async () => {
+      // Check for cached trailer URL
       const cachedTrailerUrl = localStorage.getItem(`trailer-${movieId}-${autoplay}`);
       if (cachedTrailerUrl) {
         setTrailerUrl(cachedTrailerUrl);
         setIsLoading(false);
       } else {
         try {
+          // Fetch video data from TMDB API
           const videoData = await getMovieVideos(movieId);
           const baseEmbedUrl = `https://www.youtube.com/embed/${videoData[0]?.key}`;
           const autoplayUrl = `${baseEmbedUrl}?autoplay=1&controls=0&mute=1&modestbranding=1&showinfo=0&rel=0`;
           
+          // Cache the trailer URLs for later use
           localStorage.setItem(`trailer-${movieId}-true`, autoplayUrl);
           localStorage.setItem(`trailer-${movieId}-false`, baseEmbedUrl);
   
@@ -35,23 +34,23 @@ const Trailer: React.FC<TrailerProps> = ({ movieId, fallbackImage, autoplay }) =
           setTrailerUrl(embedUrl);
           setIsLoading(false);
         } catch (error) {
+           // In case of error, open the snackbar and stop loading
           setSnackbarOpen(true);
           setIsLoading(false);
         }
       }
     };
+    // Trigger the fetching of the trailer URL
     fetchTrailerUrl();
   }, [movieId, autoplay]);
 
   const handleError = () => {
+    // Set error loading state to true when an error occurs
     setErrorLoading(true);
   };
 
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
-
   if (isLoading) {
+    // Display a circular progress component until the trailer is loaded
     return (
       <Box sx={{ position: 'relative' }}>
         <CardMedia
@@ -75,6 +74,7 @@ const Trailer: React.FC<TrailerProps> = ({ movieId, fallbackImage, autoplay }) =
   }
 
   if (!trailerUrl || errorLoading) {
+    // Display fallback image if trailer URL is not found or an error occurred
     return (
       <Box sx={{ position: 'relative' }}>
         <CardMedia
@@ -87,6 +87,7 @@ const Trailer: React.FC<TrailerProps> = ({ movieId, fallbackImage, autoplay }) =
     );
   }
 
+  // Display the fetched trailer
   return (
     <Box sx={{ position: 'relative', width: '100%', height: '100%', paddingBottom: '56.25%' }}>
       <iframe 

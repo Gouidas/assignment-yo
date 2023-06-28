@@ -9,6 +9,8 @@ import { ColorContext } from '../lib/context/ColorContext';
 import SectionWithItems from './reusable/SectionWithItems';
 import Trailer from './reusable/Trailer';
 import DialogComponent from './reusable/DialogComponent';
+import { ACTOR_SORT_OPTIONS, MovieSortOptions } from '../lib/constants';
+
 
 // MovieDetails is a component for displaying details of a selected movie in a dialog box.
 const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, actors, open, onClose }) => {
@@ -16,7 +18,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, actors, open, onClos
   const { title, overview, homepage, genres, production_companies, imdb_id  } = movie;
 
   // Sorting options for the actors list.
-  const actorSortOptions = ['name', 'character', 'popularity'] as (keyof Cast)[];
+  const mutableActorSortOptions = [...ACTOR_SORT_OPTIONS];
 
   // Use a useMemo hook to avoid unnecessary computations in case of re-renders.
   const castMembers = useMemo(() => actors.flatMap(actor => actor.cast), [actors]);
@@ -25,7 +27,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, actors, open, onClos
   const { sortedData: sortedCast, setSortKey: setActorSortKey } = useSort<Cast>(
     castMembers,
     'name',
-    actorSortOptions
+    mutableActorSortOptions
   );
 
   // The details of the movie are displayed in a Dialog component.
@@ -107,9 +109,9 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, actors, open, onClos
             }}
           >
             <SortSelect 
-              options={actorSortOptions.map(option => ({ value: option, label: option }))}
+              options={mutableActorSortOptions.map(option => ({ value: option, label: option }))}
               defaultValue='name'
-              onChange={(value) => setActorSortKey(value as 'name' | 'character' | 'popularity')}
+              onChange={(value: string | number) => setActorSortKey(value as keyof Cast)}
               selectedColorProp={selectedColor}
               labelText='Sort Actors by'
               shouldUpdateContext={false} 

@@ -7,8 +7,6 @@ export interface EntityCardProps {
   altText: string;
   children: React.ReactNode;
   onClick?: () => void;
-  selectedColorProp?: string;
-  overview?: string;
   index: number;
   totalItems: number;
   onHover?: (hovered: boolean) => void;

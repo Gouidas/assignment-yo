@@ -1,30 +1,22 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Box, Typography, ThemeProvider } from '@mui/material';
+import { Box, ThemeProvider } from '@mui/material';
 import ErrorSnackbar from './components/reusable/ErrorSnackbar';
-import EntityCard from './components/reusable/EntityCard';
-import MovieDetails from './components/MovieDetails';
 import { useMovies } from './lib/hooks/useMovies';
 import { useMovieDetails } from './lib/hooks/useMovieDetails';
-import { Movie } from './lib/types/Movie';
 import theme from './theme';
 import { ColorContext } from './lib/context/ColorContext';
 import { ReactComponent as Logo } from './assets/images/logo.svg';
 import LoadingScreen from './components/reusable/LoadingScreen';
 import Navbar from './components/Navbar';
+import useErrors from './lib/hooks/useErrors';
+import MovieCards from './components/cards/renderMovies';
 
 const App: React.FC = () => {
   const { selectedColor } = useContext(ColorContext); 
-  const [moviesError, setMoviesError] = useState<string | null>(null);
-  const [detailsError, setDetailsError] = useState<string | null>(null);
+  const { error: moviesError, handleError: handleMoviesError, resetError: resetMoviesError } = useErrors();
+  const { error: detailsError, handleError: handleDetailsError, resetError: resetDetailsError } = useErrors();
 
-  const handleMoviesError = useCallback((error: string) => {
-    setMoviesError(error);
-  }, []);
-
-  const handleDetailsError = useCallback((error: string) => {
-      setDetailsError(error);
-  }, []);
   const { movies, loading: moviesLoading, setSortKey } = useMovies(handleMoviesError);
   const { actors, selectedMovie, loading: detailsLoading, open, handleOpen, handleClose } = useMovieDetails(handleDetailsError);
 
@@ -40,8 +32,8 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {moviesLoading || detailsLoading ? <LoadingScreen svg={<Logo />} text='Assignment' /> : null}
-      {moviesError ? <ErrorSnackbar open={!!moviesError} onClose={() => setMoviesError(null)} message={moviesError || ''} /> : null}
-      {detailsError ? <ErrorSnackbar open={!!detailsError} onClose={() => setDetailsError(null)} message={detailsError || ''} /> : null}
+      {moviesError ? <ErrorSnackbar open={!!moviesError} onClose={resetMoviesError} message={moviesError || ''} /> : null}
+      {detailsError ? <ErrorSnackbar open={!!detailsError} onClose={resetDetailsError} message={detailsError || ''} /> : null}
       <Box
         sx={{
           backgroundColor: 'primary.main',
@@ -50,7 +42,6 @@ const App: React.FC = () => {
           marginTop: '100px',
           mx: 'auto'
         }}
-        maxWidth="xl"
       >
         <Navbar setSortKey={setSortKey} selectedColor={selectedColor}/>
         <Box
@@ -64,37 +55,19 @@ const App: React.FC = () => {
             justifyContent: 'center'
           }}
         >
-          {loading ? (
+         {loading ? (
             <LoadingScreen svg={<Logo />} text='Assignment' />
           ) : (
-            <>
-              {movies.map((movie: Movie, index: number) => (
-                <EntityCard
-                  key={movie.id}
-                  movie={movie}
-                  image={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                  altText={movie.title}
-                  onClick={() => handleOpen(movie.id)}
-                  selectedColorProp={selectedColor}
-                  overview={movie.overview}
-                  index={index}
-                  totalItems={movies.length} 
-                  onHover={(hovered) => handleCardHover(hovered, index)}
-                >
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    {hoveredCardIndex === index && movie.title}
-                    {hoveredCardIndex !== index && (movie.title.length > 21 ? `${movie.title.substring(0, 21)}...` : movie.title)}
-                  </Typography>
-                  <Typography variant="subtitle2">{movie.release_date}</Typography>
-                  <Typography variant="subtitle2">
-                    {movie.vote_average} ({movie.vote_count} votes)
-                  </Typography>
-                </EntityCard>
-              ))}
-              {selectedMovie && actors && (
-                <MovieDetails movie={selectedMovie} actors={actors} open={open} onClose={handleClose} />
-              )}
-            </>
+            <MovieCards
+              movies={movies}
+              selectedMovie={selectedMovie}
+              actors={actors}
+              open={open}
+              onClose={handleClose}
+              onHover={handleCardHover}
+              onClick={handleOpen}
+              hoveredCardIndex={hoveredCardIndex}
+            />
           )}
         </Box>
       </Box>

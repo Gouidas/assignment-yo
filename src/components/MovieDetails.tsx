@@ -3,7 +3,7 @@ import { Box, Dialog, DialogContent, Typography, Link, } from '@mui/material';
 import { MovieDetailsProps } from '../lib/types/MovieDetailsProps';
 import { Cast } from '../lib/types/Cast';
 import SortSelect from './reusable/SortSelect';
-import EntityCard from './reusable/EntityCard';
+import EntityCard from './cards/EntityCard';
 import { useSort } from '../lib/hooks/useSort';
 import { ColorContext } from '../lib/context/ColorContext';
 import prifileTransparent from '../assets/images/prifileTransparent.png';
@@ -112,7 +112,6 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, actors, open, onClos
                 <EntityCard
                   image={cast.profile_path ? `https://image.tmdb.org/t/p/original${cast.profile_path}` : prifileTransparent}
                   altText={cast.name}
-                  selectedColorProp={selectedColor}
                   index={index}
                   totalItems={sortedCast.length}
                   disableHover={true}

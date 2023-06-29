@@ -77,4 +77,4 @@ const EntityCard: React.FC<EntityCardProps> = ({
 
 };
 
-export default React.memo(EntityCard);
+export default EntityCard;

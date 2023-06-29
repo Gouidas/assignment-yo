@@ -56,4 +56,4 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ svg, text }) => {
   );
 };
 
-export default LoadingScreen;
+export default React.memo(LoadingScreen);

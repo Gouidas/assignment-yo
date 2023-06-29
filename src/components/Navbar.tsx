@@ -49,7 +49,7 @@ const Navbar: React.FC<NavbarTypes> = ({ setSortKey, selectedColor }) => {
       <Box sx={{display: 'flex'}}>
         <Box sx={{mx: '1rem'}}>
         {/* On Button click, the handleDialogOpen function is triggered to open the dialog */}
-        <Button color="inherit" onClick={handleDialogOpen}>Docs</Button> 
+        <Button color="inherit" onClick={handleDialogOpen}>Doc</Button> 
         {/* DialogComponent wraps the DocumentationComponent and controls its visibility based on the open state */}
         <DialogComponent 
             title="Documentation" 

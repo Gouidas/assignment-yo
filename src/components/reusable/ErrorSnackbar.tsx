@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { ColorContext } from '../../lib/context/ColorContext'; 
-import { CustomErrorSnackbarProps } from '../../lib/types/aaa';
+import { CustomErrorSnackbarProps } from '../../lib/types/CustomErrorSnackbarProps';
 
 
 // Snackbar for error messages with color provided from a context
@@ -20,4 +20,4 @@ const ErrorSnackbar: React.FC<CustomErrorSnackbarProps> = ({ open, onClose, mess
   );
 };
 
-export default ErrorSnackbar;
+export default React.memo(ErrorSnackbar);

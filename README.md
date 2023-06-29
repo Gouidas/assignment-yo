@@ -57,6 +57,10 @@ Refer to the project's `Documentation.tsx` file for detailed descriptions and ex
 ## How to Run
 
 - Clone the repository
+- Create an .env file in the root directory.
+- Add the provided variables to the .env file (replace your_value with the actual values provided):
+  REACT_APP_VARIABLE1=your_value
+  REACT_APP_VARIABLE2=your_value
 - Run `npm install` to install dependencies.
 - Run `npm start` to start the development server.
 - Open http://localhost:3005 to view it in the browser. (change this in package.json file)

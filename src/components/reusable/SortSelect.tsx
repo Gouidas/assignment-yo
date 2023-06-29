@@ -50,23 +50,20 @@ const SortSelect: React.FC<SortSelectProps> = ({ options, defaultValue, onChange
     backgroundColor: 'background.paper',
   }));
 
-  const StyledMenuItem = styled(MenuItem)(({ theme, color }) => {
-    const contrastTextColor = theme.palette.getContrastText(color || '#E50914');
+  const StyledMenuItem = styled(MenuItem)(({ color }) => {
     const selectedAndHoverColor = shouldUpdateContext ? color : selectedColorContext;
     return {
       '&.Mui-selected, &.Mui-selected:hover': {
         backgroundColor: selectedAndHoverColor,
-        color: contrastTextColor,
       },
       '&:hover': {
         backgroundColor: selectedAndHoverColor,
-        color: contrastTextColor,
       },
     };
   });
   
 
-  const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
+  const StyledInputLabel = styled(InputLabel)(() => ({
     color: 'text.secondary',
     '&.Mui-focused': {
       color: selectedColorContext, 

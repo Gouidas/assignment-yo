@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
-import SectionWithItems from '../src/components/reusable/SectionWithItems';
+import SectionWithItems from '../src/components/SectionWithItems';
 import { SectionWithItemsProps } from '../src/lib/types/SectionWithItemsProps';
 
 test('renders SectionWithItems component with title and items', () => {

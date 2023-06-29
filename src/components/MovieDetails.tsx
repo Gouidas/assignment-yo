@@ -6,7 +6,7 @@ import SortSelect from './reusable/SortSelect';
 import EntityCard from './cards/EntityCard';
 import { useSort } from '../lib/hooks/useSort';
 import { ColorContext } from '../lib/context/ColorContext';
-import SectionWithItems from './reusable/SectionWithItems';
+import SectionWithItems from './SectionWithItems';
 import Trailer from './reusable/Trailer';
 import DialogComponent from './reusable/DialogComponent';
 import { ACTOR_SORT_OPTIONS, MovieSortOptions } from '../lib/constants';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { SvgIcon } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import { ColorChangingLogoProps } from '../../lib/types/ColorChangingLogoProps';
@@ -13,4 +14,4 @@ const ColorChangingLogo: React.FC<ColorChangingLogoProps> = ({
   );
 };
 
-export default ColorChangingLogo;
+export default React.memo(ColorChangingLogo);

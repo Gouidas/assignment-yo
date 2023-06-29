@@ -1,215 +1,279 @@
 import React from 'react';
-import { Divider, Typography, List, ListItem } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { Box, List, ListItem, Typography } from '@mui/material';
 
-//The DocumentationComponent is a functional component that returns static content for the application documentation.
-const DocumentationComponent: React.FC = () => {
+const CustomTypography = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+}));
+
+const Documentation: React.FC = () => {
   return (
-    <div>
-      <Typography variant="h4" gutterBottom>
-        Movie Release Viewer Application Documentation
-      </Typography>
-      <Divider />
-
+    <Box padding="2rem">
       <Typography variant="h5" gutterBottom>
-        Overview
+        Documentation
       </Typography>
-      <Typography variant="body1">
-        The "Movie Release Viewer" is a React web application developed with TypeScript and styled with Material-UI. This application provides users with information about upcoming movie releases, presenting them in an interactive, card-based interface.
+      <Typography  gutterBottom>
+        Project Description
       </Typography>
-
-      <Typography variant="h5" gutterBottom>
-        Libraries Utilized
+      <CustomTypography gutterBottom>
+        This is a simple Movie Release Viewer application that displays upcoming movies for the next three months. 
+        The movies are presented in cards, showing the title, release date, and average vote along with the number of votes. 
+        Users can sort the movie cards by average vote, title, release date, and popularity. Clicking on a card opens a 
+        dialog with more detailed information about the movie, including a list of actors. The actors can also be sorted by 
+        their real name, character name, popularity, and their order from the API.
+      </CustomTypography>
+      <Typography  gutterBottom>
+        Project Structure
       </Typography>
       <List>
-        <ListItem>ReactJS</ListItem>
-        <ListItem>Material-UI</ListItem>
-        <ListItem>TypeScript</ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>src:</strong> The root directory of the source code.
+          </CustomTypography>
+        </ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>api:</strong> Contains the API service (tmdb.ts) which handles all API requests using Axios.
+          </CustomTypography>
+        </ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>components:</strong> Contains all React components, including the Documentation, MovieDetails, Navbar, SectionWithItems, and several reusable components.
+          </CustomTypography>
+        </ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>lib:</strong> Contains various utility functions, constants, and hooks used across the application.
+          </CustomTypography>
+        </ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>types:</strong> Contains type definitions for various data structures used throughout the application.
+          </CustomTypography>
+        </ListItem>
       </List>
-
-      <Typography variant="h5" gutterBottom>
-        Key Features
+      <Typography  gutterBottom>
+        Main Features
       </Typography>
       <List>
-        <ListItem>Upcoming Movies Display: Showcases films scheduled for release over the next three months.</ListItem>
-        <ListItem>Informative Movie Cards: Each card reveals the title, release date, and average vote count (with total vote numbers in parentheses).</ListItem>
-        <ListItem>Sort Functionality: Users can sort the movie cards by average vote, title, release date (default), or popularity.</ListItem>
-        <ListItem>Detailed Movie Dialog: Clicking on a card opens a dialog presenting more information about the selected movie.</ListItem>
-        <ListItem>Comprehensive Movie Details: The dialog displays the movie title, overview, homepage link, genre list, production companies (with logos), and a list of the film's actors (presented as cards). Each actor card includes an image, the actor's real name, their character's name, and their popularity.</ListItem>
-        <ListItem>Actor Sort Options: Within the movie dialog, users can sort actor cards by real name, character name, popularity, or the initial order from the API (default).</ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>Upcoming Movie Display:</strong> The application fetches data from the TMDB API and displays all upcoming 
+            movies in cards. Each card includes the movie's title, release date, average vote, and vote count.
+          </CustomTypography>
+        </ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>Sorting Functionality:</strong> Users can sort the movie cards by average vote, title, release date, and 
+            popularity. The application uses a custom React hook for managing and applying the sorting logic.
+          </CustomTypography>
+        </ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>Movie Details:</strong> When a movie card is clicked, a dialog opens to show more detailed information 
+            about the movie, including the overview, homepage link, genres, production companies, and actors.
+          </CustomTypography>
+        </ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>Actor Sorting:</strong> In the movie details dialog, the list of actors can be sorted by their real name, 
+            character name, popularity, and the initial order from the API.
+          </CustomTypography>
+        </ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>Color Changing Functionality:</strong> The color scheme of the application changes based on the sorting 
+            selected for the movie cards.
+          </CustomTypography>
+        </ListItem>
+        <ListItem>
+          <CustomTypography>
+            <strong>Responsive Design:</strong> The application is fully responsive and provides an excellent user experience 
+            across all device types.
+          </CustomTypography>
+        </ListItem>
       </List>
-
-      <Typography variant="h5" gutterBottom>
-        Application Structure
-      </Typography>
-      <Typography variant="h6">
-        Entry point
-      </Typography>
-      <Typography variant="body1">
-        The application's entry point is index.tsx. This file renders the App component within the ColorProvider context to enable global access to color settings.
-      </Typography>
-
-      <Typography variant="h6">
-        Main Application Component - App.tsx
-      </Typography>
-      <Typography variant="body1">
-        The App component establishes the application layout and coordinates movie loading and error handling processes. It uses hooks (useMovies, useMovieDetails) to load movie data and uses the ColorContext to pull the currently selected color for the application theme. The handleOpen function triggers when a user clicks on a movie card, prompting the MovieDetails component to open.
-      </Typography>
-
-      <Typography variant="h6">
-        Entity Card Component - EntityCard.tsx
-      </Typography>
-      <Typography variant="body1">
-        This component represents each movie in the grid. The EntityCard displays an image and basic information about a movie, and reveals more information when hovered over. It has a click event handler that opens the MovieDetails dialog for more extensive movie information.
-      </Typography>
-
-      <Typography variant="h6">
-        Movie Details Component - MovieDetails.tsx
-      </Typography>
-      <Typography variant="body1">
-        This component offers a detailed view of a movie, presented as a dialog that opens when a user clicks on a movie card.
-      </Typography>
-
-      <Typography variant="h5" gutterBottom>
-        Error Handling
-      </Typography>
-      <Typography variant="body1">
-        Error situations are handled by setting error messages in state variables (moviesError and detailsError). These messages are displayed using an ErrorSnackbar component when an error occurs.
-      </Typography>
-
-      <Typography variant="h5" gutterBottom>
-        Data Source
-      </Typography>
-      <Typography variant="body1">
-        Movie data is provided by the TMDB API, authenticated with the API read access token. Movie images are retrieved by appending the poster path to the base TMDB image URL. To optimize performance, movie details data is cached in local storage for up to one day, limiting unnecessary API calls.
-      </Typography>
-
-      <Typography variant="h5" gutterBottom>
+      <Typography  gutterBottom>
         Components
       </Typography>
-      <Typography variant="h6">
-        SortSelect
-      </Typography>
-      <Typography variant="body1">
-        A React component that presents a list of selectable sorting options. It customizes the Material UI elements according to the selected color pulled from the ColorContext using the useContext React hook.
+
+      <List>
+        <ListItem>
+          <CustomTypography>
+            <strong>App:</strong> The root component of the application. It sets up the application theme and layout.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>Documentation:</strong> Provides comprehensive details about the project, its structure, and the purpose of each file and component.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>MovieDetails:</strong> Displays detailed information about a specific movie when a user clicks on a Movie Card. It fetches data such as the movie's title, overview, homepage link, genres, production companies, and cast details.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>Navbar:</strong> The application's navigation bar. Contains the SortSelect component for sorting the displayed movie cards.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>SectionWithItems:</strong> A layout component that displays a section with various items (sort list).
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>CardContainer:</strong> A container component for card components, ensuring consistent style and layout.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>EntityCard:</strong> A generalized card component for displaying entities such as movies or actors.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>HoveredCard:</strong> Special card component that triggers when the user hovers over a MovieCard, displaying additional information such as the movie trailer.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>MovieCard:</strong> Represents a single movie card. Displays the movie's title, release date, and average vote.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>NormalCard:</strong> A standard card component with a consistent design throughout the application.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>RenderMovies:</strong> A component responsible for fetching and rendering a list of movie cards.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>ColorChangingLogo:</strong> A component representing the logo of the application. The logo's color changes based on the selected sorting option.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>DialogComponent:</strong> A reusable dialog component to display detailed information in a modal when a user clicks on a MovieCard.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>ErrorSnackbar:</strong> A component for displaying error messages in the form of a Snackbar.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>LoadingScreen:</strong> A component to display a loading state while fetching data from the API.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>SortSelect:</strong> A component for selecting a sorting criterion. It also triggers a color change in the application.
+          </CustomTypography>
+        </ListItem>
+
+        <ListItem>
+          <CustomTypography>
+            <strong>TrailerComponent:</strong> A component responsible for displaying a movie trailer when available.
+          </CustomTypography>
+        </ListItem>
+
+      </List>
+      <Typography  gutterBottom>
+        Hooks
       </Typography>
 
-      <Typography variant="h6">
-        Trailer
-      </Typography>
-      <Typography variant="body1">
-        A React component for displaying a movie trailer. If the trailer is not available in the local storage, it fetches video data from an API and constructs the trailer URL. If the trailer fails to load, it displays an error message to the user.
-      </Typography>
+      <List>
+        <ListItem>
+          <CustomTypography>
+            <strong>ColorContext & ColorProvider:</strong> Context and provider for managing and passing down the color selection state in the app.
+          </CustomTypography>
+        </ListItem>
 
-      <Typography variant="h6">
-        TMDB API
-      </Typography>
-      <Typography variant="body1">
-        A module containing functions to interact with The Movie Database (TMDB) API. It exposes functions to get upcoming movies, fetch specific movie details, and retrieve actors of a specific movie.
-      </Typography>
+        <ListItem>
+          <CustomTypography>
+            <strong>calculateColumns:</strong> Utility function used in the useColumnCount hook to calculate the number of columns that can be displayed based on the current window size.
+          </CustomTypography>
+        </ListItem>
 
-      <Typography variant="h6">
-        ColorContext and ColorProvider
-      </Typography>
-      <Typography variant="body1">
-        A React context for managing the state of the selected color across the application. The ColorContext can be used in any component inside ColorProvider to access and update the selected color, re-rendering all components using the ColorContext when the selected color changes.
-      </Typography>
+        <ListItem>
+          <CustomTypography>
+            <strong>useCachedMovieDetails:</strong> Hook that fetches movie details from the TMDB API and caches them in local storage. It also ensures the data isn't stale by refreshing it if it's more than a day old.
+          </CustomTypography>
+        </ListItem>
 
-      <Typography variant="h6">
-        ColorChangingLogo
-      </Typography>
-      <Typography variant="body1">
-        A wrapper around an SVG icon whose fill color changes based on a selected color passed as a prop.
-      </Typography>
+        <ListItem>
+          <CustomTypography>
+            <strong>useColumnCount:</strong> Hook that calculates the number of columns that can be displayed based on the current window size. It also sets a 'disableHover' flag to true if only one column can be displayed.
+          </CustomTypography>
+        </ListItem>
 
-      <Typography variant="h6">
-        ErrorSnackbar
-      </Typography>
-      <Typography variant="body1">
-        A component that displays error messages in a Snackbar component from Material UI. The color of the Snackbar changes based on the selected color from the ColorContext.
-      </Typography>
+        <ListItem>
+          <CustomTypography>
+            <strong>useErrors:</strong> Hook that manages an error state, providing methods to set, handle, and reset the error state.
+          </CustomTypography>
+        </ListItem>
 
-      <Typography variant="h6">
-        LoadingScreen
-      </Typography>
-      <Typography variant="body1">
-        A component that displays a logo and optional text during data loading. The color of the logo changes every second.
-      </Typography>
+        <ListItem>
+          <CustomTypography>
+            <strong>useInterval:</strong> Hook that calls the provided callback function every 'delay' milliseconds. It's an encapsulation of setInterval that uses React hooks.
+          </CustomTypography>
+        </ListItem>
 
-      <Typography variant="h6">
-        Navbar
-      </Typography>
-      <Typography variant="body1">
-        A top navigation bar that includes a color-changing logo and a sorting select input.
-      </Typography>
+        <ListItem>
+          <CustomTypography>
+            <strong>useMovieDetails:</strong> Hook for managing the detailed view of a movie, including fetching and storing the selected movie's data and handling the modal's open/close state.
+          </CustomTypography>
+        </ListItem>
 
-      <Typography variant="h6">
-        SectionWithItems
-      </Typography>
-      <Typography variant="body1">
-        This component displays a title and a series of items. Each item can be a chip or an image with a text overlay.
-      </Typography>
+        <ListItem>
+          <CustomTypography>
+            <strong>useMovies:</strong> Hook that manages the movies list, fetching data, and handling the sorting of the list.
+          </CustomTypography>
+        </ListItem>
 
-      <Typography variant="body1">
-        In summary, the Movie Release Viewer application offers a seamless, interactive, and informative user experience for movie enthusiasts looking to stay updated on upcoming movie releases. Through robust error handling and efficient data management, it ensures optimal performance.
-      </Typography>
+        <ListItem>
+          <CustomTypography>
+            <strong>useHover:</strong> A custom hook for managing hover states in components.
+          </CustomTypography>
+        </ListItem>
 
-      <Typography variant="h5" gutterBottom>
-        Test Documentation
-      </Typography>
-      <Typography variant="body1">
-        The Movie Release Viewer application is thoroughly tested to ensure the reliability and correctness of its functionality. The tests cover various components and functionalities of the application. Here is an overview of the test suites:
-      </Typography>
+        <ListItem>
+          <CustomTypography>
+            <strong>useSort:</strong> A custom hook responsible for managing and applying the sorting logic to the movies and actors.
+          </CustomTypography>
+        </ListItem>
 
-      <Typography variant="h6">
-        calculateColumns.test.tsx
-      </Typography>
-      <Typography variant="body1">
-        This test suite verifies the correctness of the `calculateColumns` utility function, which is responsible for determining the number of grid columns based on the screen size.
-      </Typography>
-
-      <Typography variant="h6">
-        fetchAndUpdateDetails.test.tsx
-      </Typography>
-      <Typography variant="body1">
-        This test suite validates the behavior of the `fetchAndUpdateDetails` function, which fetches movie details from the TMDB API and updates the state of the movie details.
-      </Typography>
-
-      <Typography variant="h6">
-        useSort.test.tsx
-      </Typography>
-      <Typography variant="body1">
-        This test suite tests the `useSort` custom hook, which handles the sorting of movie data based on different sort keys. It ensures that the sorting logic is working correctly and that the sorted data is updated accordingly.
-      </Typography>
-
-      <Typography variant="h6">
-        useInterval.test.tsx
-      </Typography>
-      <Typography variant="body1">
-        This test suite verifies the behavior of the `useInterval` hook, which is responsible for invoking a callback function at a specified interval. It ensures that the callback is triggered at the correct intervals and that the interval can be properly cleared.
-      </Typography>
-
-      <Typography variant="h6">
-        useFetch.test.tsx
-      </Typography>
-      <Typography variant="body1">
-        This test suite tests the `useFetch` hook, which handles fetching data from an API endpoint. It ensures that the fetch request is made correctly, and the data and loading state are updated accordingly.
-      </Typography>
-
-      <Typography variant="h6">
-        LoadingScreen.test.tsx
-      </Typography>
-      <Typography variant="body1">
-        This test suite validates the behavior of the `LoadingScreen` component, which displays a loading screen with a rotating logo. It ensures that the logo rotates every second and that the loading screen is rendered correctly.
-      </Typography>
-
-      <Typography variant="h6">
-        SectionWithItems.test.tsx
-      </Typography>
-      <Typography variant="body1">
-        This test suite verifies the rendering and behavior of the `SectionWithItems` component, which displays a title and a series of items. It ensures that the component renders the title and items correctly and handles interactions properly.
-      </Typography>
-    </div>
+        <ListItem>
+          <CustomTypography>
+            <strong>useFetch:</strong> A custom hook for fetching data from the API. It handles the loading state and errors during the fetch process.
+          </CustomTypography>
+        </ListItem>
+      </List>
+    </Box>
   );
 };
 
-export default DocumentationComponent;
+export default Documentation;

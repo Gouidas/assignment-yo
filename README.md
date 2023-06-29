@@ -75,4 +75,4 @@ This project is licensed under the ...
 
 ## Author
 
-Gouiads Athanasios
+Gouidas Athanasios

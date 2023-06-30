@@ -18,8 +18,14 @@ const App: React.FC = () => {
 const { selectedColor } = useContext(ColorContext); 
 
 // The useErrors hooks are used to manage error state and handlers for both movies and details.
-const { error: moviesError, handleError: handleMoviesError, resetError: resetMoviesError } = useErrors();
-const { error: detailsError, handleError: handleDetailsError, resetError: resetDetailsError } = useErrors();
+const { 
+  error: moviesError, 
+  handleError: handleMoviesError, 
+  resetError: resetMoviesError, 
+  error: detailsError, 
+  handleError: 
+  handleDetailsError, 
+  resetError: resetDetailsError } = useErrors();
 
 // We're fetching movie and movie details data using custom hooks. The error handlers are passed as arguments to these hooks.
 const { movies, loading: moviesLoading, setSortKey } = useMovies(handleMoviesError);

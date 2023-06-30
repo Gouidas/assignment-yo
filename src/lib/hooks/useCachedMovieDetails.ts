@@ -8,12 +8,13 @@ import { getMovieDetails } from "../../api/tmdb";
 // If the 'disableHover' flag is true, it immediately returns null and does not perform any operations.
 const useCachedMovieDetails = (
   movie: Movie | undefined,
-  disableHover: boolean
+  disableHover: boolean,
+  isHovered: boolean
 ): Movie | null => {
   const [movieDetails, setMovieDetails] = useState<Movie | null>(null);
 
   useEffect(() => {
-    if (!movie || disableHover) {
+    if (!movie || disableHover || !isHovered) {
       setMovieDetails(null);
       return;
     }
@@ -32,7 +33,7 @@ const useCachedMovieDetails = (
     } else {
       fetchAndUpdateDetails(movie.id);
     }
-  }, [movie, disableHover]);
+  }, [movie, disableHover, isHovered]);
 
   const fetchAndUpdateDetails = (movieId: number) => {
     getMovieDetails(movieId)
